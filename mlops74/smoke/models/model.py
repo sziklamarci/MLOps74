@@ -1,26 +1,26 @@
 import torch
+import torch.nn as nn
+import torchvision.models as models
+import torch.nn.functional as F
 
-class MyNeuralNet(torch.nn.Module):
-    """ Basic neural network class. 
-    
-    Args:
-        in_features: number of input features
-        out_features: number of output features
-    
-    """
-    def __init__(self, in_features: int, out_features: int) -> None:
-        self.l1 = torch.nn.Linear(in_features, 500)
-        self.l2 = torch.nn.Linear(500, out_features)
-        self.r = torch.nn.ReLU()
-    
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass of the model.
+class MyResNet(nn.Module):
+    def __init__(self, num_classes=2, dropout_rate=0.5) -> None:
+        super(MyResNet, self).__init__()
+        resnet = models.resnet34(pretrained=True)  # We can choose from ResNet variants (18,34,50,101,110,152..) if needed
+        self.features = nn.Sequential(*list(resnet.children())[:-2])  # Remove the last two layers (avgpool and fc) in case we want to add something more
         
-        Args:
-            x: input tensor expected to be of shape [N,in_features]
+        self.avgpool = nn.AdaptiveAvgPool2d(1)
+        self.fc = nn.Linear(resnet.fc.in_features, num_classes)
+        self.dropout = nn.Dropout(p=dropout_rate)
+        
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.features(x)
+        x = self.avgpool(x)
+        x = x.view(x.size(0), -1)
+        x = self.dropout(x)
+        x = self.fc(x)
+        return F.sigmoid(x)
 
-        Returns:
-            Output tensor with shape [N,out_features]
+model = MyResNet()
 
-        """
-        return self.l2(self.r(self.l1(x)))
+print(model)

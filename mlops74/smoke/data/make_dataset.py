@@ -34,7 +34,7 @@ def load_images_from_folder(folder):
             img = cv2.imread(file_path)
             if img is not None:
                 img = cv2.resize(img, (224, 224))  # Resize images
-                img = img / 255.0  # Normalize images
+                #img = img / 255.0  # Normalize images
                 images.append(img)
                 
                 # Extract label from filename based on starting with 'smoking' or 'notsmoking'
@@ -58,14 +58,23 @@ if __name__ == '__main__':
     (train_images, train_labels), (val_images, val_labels), (test_images, test_labels) = process_data()
 
     # If we want we can have some more transformations included
-    transform = transforms.Compose([
+    transform_train = transforms.Compose([
         transforms.ToTensor(),
+        transforms.RandomVerticalFlip(p=0.5),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomErasing(p=0.5, scale=(0.1,0.15)),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ])
+
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
     # Create custom datasets
-    train_dataset = CustomDataset(train_images, train_labels, transform=transform)
-    val_dataset = CustomDataset(val_images, val_labels, transform=transform)
-    test_dataset = CustomDataset(test_images, test_labels, transform=transform)
+    train_dataset = CustomDataset(train_images, train_labels, transform=transform_train)
+    val_dataset = CustomDataset(val_images, val_labels, transform=transform_train)
+    test_dataset = CustomDataset(test_images, test_labels, transform=transform_test)
 
     # Create data loaders
     train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
