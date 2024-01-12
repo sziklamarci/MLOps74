@@ -1,7 +1,6 @@
 import os
 import cv2
 import numpy as np
-import scikit
 
 def load_images_from_folder(folder):
     images = []
@@ -17,9 +16,9 @@ def load_images_from_folder(folder):
     return np.array(images), np.array(labels)
 
 def process_data():
-    train_images, train_labels = load_images_from_folder('/mlops74/data/raw/Training')
-    val_images, val_labels = load_images_from_folder('/mlops74/data/raw/Validation')
-    test_images, test_labels = load_images_from_folder('/mlops74/data/raw/Test')
+    train_images, train_labels = load_images_from_folder('mlops74/data/raw/archive/Training')
+    val_images, val_labels = load_images_from_folder('mlops74/data/raw/archive/Validation')
+    test_images, test_labels = load_images_from_folder('mlops74/data/raw/archive/Testing')
 
     return (train_images, train_labels), (val_images, val_labels), (test_images, test_labels)
 
