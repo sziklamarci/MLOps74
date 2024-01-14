@@ -23,7 +23,7 @@ class CustomDataset(Dataset):
         if self.transform:
             img = self.transform(img)
 
-        return img, label
+        return img, torch.tensor(label, dtype=torch.int64)
 
 def load_images_from_folder(folder):
     images = []

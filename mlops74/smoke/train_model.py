@@ -1,105 +1,74 @@
 import torch
 import torch.nn as nn
-from torch.optim.lr_scheduler import MultiStepLR
+import torch.optim as optim
 from torch.utils.data import DataLoader
-from data.make_dataset import CustomDataset
-from models.model import MyNeuralNet
-from tqdm import tqdm
-import numpy as np
+from torchvision import transforms
+from data.make_dataset import CustomDataset, process_data
+from models.model import MyResNet
 
-# Set device
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+def train(model, train_loader, val_loader, num_epochs=10, lr=0.001):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
 
-# Create data loaders
-train_loader = DataLoader(torch.load("data/processed/Training/train_dataset.pt"), batch_size=64, shuffle=True)
-val_loader = DataLoader(torch.load("data/processed/Validation/val_dataset.pt"), batch_size=64, shuffle=False)
+    criterion = nn.CrossEntropyLoss()  # Use CrossEntropyLoss for classification tasks
+    optimizer = optim.Adam(model.parameters(), lr=lr)
 
-# Createing the model with MyResNet class
-model = MyNeuralNet(num_classes=2).to(device)
-
-# Define loss function and optimizer
-criterion = nn.CrossEntropyLoss()
-learning_rate = 0.0001
-optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
-lr_milestones = [7, 14, 21, 28, 35]
-multi_step_lr_scheduler = MultiStepLR(optimizer, milestones=lr_milestones, gamma=0.1)
-
-# Early stopping
-patience = 3
-counter = 0
-best_loss = np.inf
-
-# Training loop with logging
-EPOCHS = 10
-logs = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': []}
-
-model.to(device)
-
-for epoch in tqdm(range(EPOCHS)):
-    model.train()
-    train_loss = 0.0
-    correct_train = 0
-    total_train = 0
-
-    for inputs, labels in train_loader:
-        inputs, labels = inputs.to(device), labels.to(device)
-
-        optimizer.zero_grad()
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
-
-        train_loss += loss.item()
-        _, predicted_train = torch.max(outputs, 1)
-        total_train += labels.size(0)
-        correct_train += (predicted_train == labels).sum().item()
-
-    train_accuracy = correct_train / total_train
-
-    # Validation
-    model.eval()
-    with torch.no_grad():
-        val_loss = 0.0
-        correct_val = 0
-        total_val = 0
-        for inputs, labels in val_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
-
-            outputs = model(inputs)
+    for epoch in range(num_epochs):
+        # Training
+        model.train()
+        for images, labels in train_loader:
+            images, labels = images.to(device), labels.to(device)
+            optimizer.zero_grad()
+            outputs = model(images)
             loss = criterion(outputs, labels)
-            val_loss += loss.item()
+            loss.backward()
+            optimizer.step()
 
-            _, predicted_val = torch.max(outputs, 1)
-            total_val += labels.size(0)
-            correct_val += (predicted_val == labels).sum().item()
+        # Validation
+        model.eval()
+        with torch.no_grad():
+            val_loss = 0.0
+            correct = 0
+            total = 0
+            for images, labels in val_loader:
+                images, labels = images.to(device), labels.to(device)
+                outputs = model(images)
+                loss = criterion(outputs, labels)
+                val_loss += loss.item()
+                _, predicted = torch.max(outputs.data, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
 
-        val_accuracy = correct_val / total_val
+            print(f"Epoch {epoch + 1}/{num_epochs}, Loss: {val_loss / len(val_loader)}, Accuracy: {(correct / total) * 100}%")
 
-    # Adjust learning rate
-    multi_step_lr_scheduler.step()
+    print("Training complete.")
 
-    # Logging
-    logs['train_loss'].append(train_loss / len(train_loader))
-    logs['train_acc'].append(train_accuracy)
-    logs['val_loss'].append(val_loss / len(val_loader))
-    logs['val_acc'].append(val_accuracy)
+if __name__ == '__main__':
+    (train_images, train_labels), (val_images, val_labels), _ = process_data()
 
-    print(f'EPOCH: {epoch + 1}/{EPOCHS} \
-    train_loss: {train_loss / len(train_loader):.4f}, train_acc: {train_accuracy:.3f} \
-    val_loss: {val_loss / len(val_loader):.4f}, val_acc: {val_accuracy:.3f} \
-    Learning Rate: {optimizer.param_groups[0]["lr"]}')
+    transform_train = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.RandomVerticalFlip(p=0.5),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomErasing(p=0.5, scale=(0.1, 0.15)),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ])
 
-    torch.save(model.state_dict(), "models/checkpoints/last.pth")
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ])
 
-    # Check for improvement and apply early stopping
-    if val_loss < best_loss:
-        counter = 0
-        best_loss = val_loss
-        torch.save(model.state_dict(), "models/checkpoints/best.pth")
-    else:
-        counter += 1
+    train_dataset = CustomDataset(train_images, train_labels, transform=transform_train)
+    val_dataset = CustomDataset(val_images, val_labels, transform=transform_test)
 
-    if counter >= patience:
-        print("Early stopping!")
-        break
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
+
+    model = MyResNet()
+
+    # Train the model
+    train(model, train_loader, val_loader)
+
+    # Save the trained model
+    torch.save(model.state_dict(), "mlops74/models/trained_model.pth")
