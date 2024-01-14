@@ -1,6 +1,6 @@
 import torch
 import pytest
-from mlops74.smoke.models.model import MyNeuralNet
+from smoke.models.model import MyNeuralNet
 
 @pytest.fixture
 def sample_input():
