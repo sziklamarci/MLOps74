@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.optim.lr_scheduler import MultiStepLR
 from torch.utils.data import DataLoader
 from data.make_dataset import CustomDataset
-from models.model import MyNeuralNet
+from mlops74.smoke.models.model import MyNeuralNet
 from tqdm import tqdm
 import numpy as np
 
