@@ -1,2 +1,2 @@
-from smoke.models.model import MyNeuralNet
+from mlops74.smoke.models.model import MyNeuralNet
 from smoke.predict_model import predict
