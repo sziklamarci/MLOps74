@@ -46,14 +46,15 @@ def load_images_from_folder(folder):
     print(f"Number of images: {len(images)}, Number of labels: {len(labels)}")
     return np.array(images), np.array(labels)
 
-if __name__ == '__main__':
     
-    def process_data():
-        train_images, train_labels = load_images_from_folder('data/raw/archive/Training/Training')
-        val_images, val_labels = load_images_from_folder('data/raw/archive/Validation/Validation')
-        test_images, test_labels = load_images_from_folder('data/raw/archive/Testing/Testing')
+def process_data():
+    train_images, train_labels = load_images_from_folder('data/raw/archive/Training/Training')
+    val_images, val_labels = load_images_from_folder('data/raw/archive/Validation/Validation')
+    test_images, test_labels = load_images_from_folder('data/raw/archive/Testing/Testing')
 
-        return (train_images, train_labels), (val_images, val_labels), (test_images, test_labels)
+    return (train_images, train_labels), (val_images, val_labels), (test_images, test_labels)
+
+if __name__ == '__main__':
 
     (train_images, train_labels), (val_images, val_labels), (test_images, test_labels) = process_data()
 
