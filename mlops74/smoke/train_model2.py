@@ -91,7 +91,6 @@ for epoch in tqdm(range(EPOCHS)):
     Learning Rate: {optimizer.param_groups[0]["lr"]}')
 
     torch.save(model.state_dict(), "models/checkpoints/last.pth")
-
     # Check for improvement and apply early stopping
     if val_loss < best_loss:
         counter = 0
