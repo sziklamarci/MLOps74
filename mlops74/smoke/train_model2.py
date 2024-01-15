@@ -1,4 +1,4 @@
-'''import torch
+import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import MultiStepLR
 from torch.utils.data import DataLoader
@@ -102,4 +102,4 @@ for epoch in tqdm(range(EPOCHS)):
 
     if counter >= patience:
         print("Early stopping!")
-        break'''
+        break

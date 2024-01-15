@@ -4,7 +4,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from data.make_dataset import CustomDataset, process_data
-from models.model import MyResNet
+from models.model import MyNeuralNet
 
 def train(model, train_loader, val_loader, num_epochs=10, lr=0.001):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -65,10 +65,10 @@ if __name__ == '__main__':
     train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
 
-    model = MyResNet()
+    model = MyNeuralNet()
 
     # Train the model
     train(model, train_loader, val_loader)
 
     # Save the trained model
-    torch.save(model.state_dict(), "mlops74/models/trained_model.pth")
+    torch.save(model.state_dict(), "models/trained_model.pth")
