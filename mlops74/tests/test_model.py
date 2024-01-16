@@ -1,6 +1,6 @@
 import torch
 import pytest
-from smoke.models.model import MyNeuralNet
+from smoke.models.model import MyNeuralNet # Run the tests from mlops74 directory
 
 @pytest.fixture
 def sample_input():
@@ -13,4 +13,10 @@ def test_model_output_shape(sample_input):
     expected_shape = (1, 2)  # Binary classification model, so 2 output classes
 
     # Check if the output shape matches the expected shape
-    assert output.shape == torch.Size(expected_shape)
+    assert output.shape == torch.Size(expected_shape), 'Output shape has to be (1, 2)'
+
+def test_error_on_wrong_shape():
+    model = MyNeuralNet()
+    
+    with pytest.raises(ValueError, match='Expected input as a 4D tensor!'):
+        model(torch.randn(1, 2, 3))

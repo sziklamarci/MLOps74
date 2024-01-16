@@ -15,8 +15,8 @@ def test_training_script():
     last_checkpoint_path = 'models/checkpoints/last.pth'
     best_checkpoint_path = 'models/checkpoints/best.pth'
     
-    assert os.path.exists(last_checkpoint_path), f'Last model checkpoint file not found: {last_checkpoint_path}'
-    assert os.path.exists(best_checkpoint_path), f'Best model checkpoint file not found: {best_checkpoint_path}'
+    assert os.path.exists(last_checkpoint_path), f'Last model checkpoint file not found: {last_checkpoint_path}' # Run the tests from mlops74 directory
+    assert os.path.exists(best_checkpoint_path), f'Best model checkpoint file not found: {best_checkpoint_path}' # Run the tests from mlops74 directory
 
 if __name__ == '__main__':
     test_training_script()

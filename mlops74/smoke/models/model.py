@@ -15,7 +15,7 @@ class MyNeuralNet(nn.Module):
         
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         if x.ndim != 4:
-            raise ValueError('Expected input to be a 4D tensor')
+            raise ValueError('Expected input as a 4D tensor!')
         x = self.features(x)
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
