@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: |
+        echo "${{ secrets.dckr_pat_FhtW8YHMT7Jz7M4DEWjEDW5tz5I }}" | docker login -u "${{ secrets.r0kkoo }}" --password-stdin docker.io
+        docker build . --file dockerfiles/train_model2.dockerfile --tag docker.io/${{ secrets.r0kkoo }}/mlops74:$GITHUB_SHA
+        docker build . --file dockerfiles/train_model.dockerfile --tag docker.io/${{ secrets.r0kkoo }}/mlops74:$GITHUB_SHA
+        docker push docker.io/${{ secrets.r0kkoo }}/mlops74:$GITHUB_SHA
