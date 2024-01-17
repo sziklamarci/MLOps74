@@ -19,8 +19,8 @@ jobs:
         echo "Current working directory: $(ls)"
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-        docker build /mlops74 --file /dockerfiles/train_model.dockerfile \
+        docker build mlops74 --file /dockerfiles/train_model.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-        docker build /mlops74 --file /dockerfiles/train_model2.dockerfile \
+        docker build mlops74 --file /dockerfiles/train_model2.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
