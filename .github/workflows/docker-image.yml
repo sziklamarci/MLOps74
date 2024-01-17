@@ -18,8 +18,8 @@ jobs:
       run: |
         echo "Docker Hub Username: ${{ secrets.DOCKER_HUB_TOKEN }}"
         echo "Docker Hub Access Token: ${{ secrets.DOCKER_HUB_USERNAME }}"
-        echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
-            -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
+        echo "${{ secrets.DOCKER_HUB_USERNAME }}" | docker login \
+            -u "${{ secrets.DOCKER_HUB_TOKEN }}" --password-stdin docker.io
         docker build . --file mlops74/dockerfiles/train_model.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         docker build . --file mlops74/dockerfiles/train_model2.dockerfile \
