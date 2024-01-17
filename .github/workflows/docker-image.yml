@@ -14,12 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+          context: mlops74
     - name: Build the Docker image
       run: |
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-        docker build /Users/macbookpro/MLOps74/mlops74 --file /Users/macbookpro/MLOps74/mlops74/dockerfiles/train_model.dockerfile \
+        docker build . --file dockerfiles/train_model.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-        docker build /Users/macbookpro/MLOps74/mlops74 --file /Users/macbookpro/MLOps74/mlops74/dockerfiles/train_model2.dockerfile \
+        docker build . --file dockerfiles/train_model2.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
