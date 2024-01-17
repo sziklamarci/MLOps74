@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-            run: |
+      run: |
         echo "secrets.dckr_pat_FhtW8YHMT7Jz7M4DEWjEDW5tz5I" | docker login -u "secrets.r0kkoo" --password-stdin docker.io
         docker build . --file dockerfiles/train_model2.dockerfile --tag docker.io/secrets.r0kkoo/mlops74:$GITHUB_SHA
         docker build . --file dockerfiles/train_model.dockerfile --tag docker.io/secrets.r0kkoo/mlops74:$GITHUB_SHA
