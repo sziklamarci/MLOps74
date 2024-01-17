@@ -26,3 +26,9 @@ class MyNeuralNet(nn.Module):
 model = MyNeuralNet()
 
 print(model)
+
+#script model using jit
+scripted_model = torch.jit.script(model)
+# Save the scripted model
+scripted_model.save("model_scripted.pt")
+
