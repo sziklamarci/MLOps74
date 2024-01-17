@@ -18,6 +18,7 @@ jobs:
           context: mlops74
     - name: Build the Docker image
       run: |
+        echo "Current working directory: $(pwd)"
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
         docker build . --file dockerfiles/train_model.dockerfile \
