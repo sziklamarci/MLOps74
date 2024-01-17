@@ -23,6 +23,6 @@ class MyNeuralNet(nn.Module):
         x = self.fc(x)
         return F.sigmoid(x)
 
-#model = MyNeuralNet()
+model = MyNeuralNet()
 
-#print(model)
+print(model)
