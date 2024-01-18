@@ -10,6 +10,7 @@ import os
 import hydra
 from omegaconf import OmegaConf
 
+
 @hydra.main(config_path="config", config_name="default_config.yaml")
 def train(config):
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
@@ -30,18 +31,19 @@ def train(config):
 
     (train_images, train_labels), (val_images, val_labels), _ = process_data()
 
-    transform_train = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.RandomVerticalFlip(p=hparams["p_RandomVerticalFlip"]),
-        transforms.RandomHorizontalFlip(p=hparams["p_RandomHorizontalFlip"]),
-        transforms.RandomErasing(p=hparams["p_RandomErasing"], scale=list(hparams["scale_RandomErasing"])),
-        transforms.Normalize(mean=hparams["mean_Normalize"], std=hparams["std_Normalize"])
-    ])
+    transform_train = transforms.Compose(
+        [
+            transforms.ToTensor(),
+            transforms.RandomVerticalFlip(p=hparams["p_RandomVerticalFlip"]),
+            transforms.RandomHorizontalFlip(p=hparams["p_RandomHorizontalFlip"]),
+            transforms.RandomErasing(p=hparams["p_RandomErasing"], scale=list(hparams["scale_RandomErasing"])),
+            transforms.Normalize(mean=hparams["mean_Normalize"], std=hparams["std_Normalize"]),
+        ]
+    )
 
-    transform_test = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean=hparams["mean_Normalize"], std=hparams["std_Normalize"])
-    ])
+    transform_test = transforms.Compose(
+        [transforms.ToTensor(), transforms.Normalize(mean=hparams["mean_Normalize"], std=hparams["std_Normalize"])]
+    )
 
     train_dataset = CustomDataset(train_images, train_labels, transform=transform_train)
     val_dataset = CustomDataset(val_images, val_labels, transform=transform_test)
@@ -50,7 +52,6 @@ def train(config):
     val_loader = DataLoader(val_dataset, batch_size=hparams["batch_size"], shuffle=False)
 
     model = MyNeuralNet()
-
 
     criterion = nn.CrossEntropyLoss()  # Use CrossEntropyLoss for classification tasks
     optimizer = optim.Adam(model.parameters(), lr=hparams["lr"])
@@ -81,12 +82,15 @@ def train(config):
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
 
-            print(f"Epoch {epoch + 1}/{hparams['n_epochs']}, Loss: {val_loss / len(val_loader)}, Accuracy: {(correct / total) * 100}%")
+            print(
+                f"Epoch {epoch + 1}/{hparams['n_epochs']}, Loss: {val_loss / len(val_loader)}, Accuracy: {(correct / total) * 100}%"
+            )
 
     print("Training complete.")
 
     # Save the trained model
     torch.save(model.state_dict(), "mlops74/models/trained_model.pth")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     train()
