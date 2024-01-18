@@ -32,5 +32,6 @@ jobs:
 
     - name: Test with pytest
       run: |
+        cd mlops74
         pip install pytest
         pytest -v
