@@ -27,11 +27,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install dvc
+        pip install "dvc[gdrive]"
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
 
     - name: Test with pytest
       run: |
         cd mlops74
+        dvc pull
         pip install pytest
         pytest -v
