@@ -16,26 +16,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install DVC
-      run: |
-        pip install dvc
-        pip install "dvc[gs]"
-        pip install "dvc[gdrive]"
-        echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json
-        gcloud auth activate-service-account --key-file=/tmp/key.json
-    
-    - name: DVC Pull
-      run: |
-        cd mlops74
-        dvc pull -v
-
     - name: Build the Docker image
       run: |
+        cd mlops74
         ls -la
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-        docker build . --file dockerfiles/train_model.dockerfile \
-            --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         docker build . --file dockerfiles/train_model2.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
