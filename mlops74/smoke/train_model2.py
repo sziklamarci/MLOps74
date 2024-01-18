@@ -11,8 +11,8 @@ import numpy as np
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Create data loaders
-train_loader = DataLoader(torch.load("data/processed/Training/train_dataset.pt"), batch_size=64, shuffle=True)
-val_loader = DataLoader(torch.load("data/processed/Validation/val_dataset.pt"), batch_size=64, shuffle=False)
+train_loader = DataLoader(torch.load("mlops74/data/processed/Training/train_dataset.pt"), batch_size=64, shuffle=True)
+val_loader = DataLoader(torch.load("mlops74/data/processed/Validation/val_dataset.pt"), batch_size=64, shuffle=False)
 
 # Createing the model with MyResNet class
 model = MyNeuralNet(num_classes=2).to(device)
@@ -31,7 +31,7 @@ best_loss = np.inf
 
 # Training loop with logging
 EPOCHS = 10
-logs = {"train_loss": [], "train_acc": [], "val_loss": [], "val_acc": []}
+logs = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': []}
 
 model.to(device)
 
@@ -80,17 +80,15 @@ for epoch in tqdm(range(EPOCHS)):
     multi_step_lr_scheduler.step()
 
     # Logging
-    logs["train_loss"].append(train_loss / len(train_loader))
-    logs["train_acc"].append(train_accuracy)
-    logs["val_loss"].append(val_loss / len(val_loader))
-    logs["val_acc"].append(val_accuracy)
+    logs['train_loss'].append(train_loss / len(train_loader))
+    logs['train_acc'].append(train_accuracy)
+    logs['val_loss'].append(val_loss / len(val_loader))
+    logs['val_acc'].append(val_accuracy)
 
-    print(
-        f'EPOCH: {epoch + 1}/{EPOCHS} \
+    print(f'EPOCH: {epoch + 1}/{EPOCHS} \
     train_loss: {train_loss / len(train_loader):.4f}, train_acc: {train_accuracy:.3f} \
     val_loss: {val_loss / len(val_loader):.4f}, val_acc: {val_accuracy:.3f} \
-    Learning Rate: {optimizer.param_groups[0]["lr"]}'
-    )
+    Learning Rate: {optimizer.param_groups[0]["lr"]}')
 
     torch.save(model.state_dict(), "models/checkpoints/last.pth")
     # Check for improvement and apply early stopping
