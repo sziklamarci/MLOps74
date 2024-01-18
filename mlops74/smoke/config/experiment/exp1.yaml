@@ -1,5 +1,5 @@
 lr: 0.001
-n_epochs: 1
+n_epochs: 10
 seed: 1337
 p_RandomVerticalFlip: 0.5
 p_RandomHorizontalFlip: 0.5
