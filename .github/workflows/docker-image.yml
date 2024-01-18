@@ -25,7 +25,7 @@ jobs:
       run: |
         cd mlops74
         pip install -U pyopenssl cryptography
-        dvc pull -v
+        dvc pull -a -r mlops74 -d gdrive://1UYdxxlSoLmMY2lXc6bFoct7Ie8vYsLIz --redirect-uri http://127.0.0.1:8080/
 
     - name: Build the Docker image
       run: |
