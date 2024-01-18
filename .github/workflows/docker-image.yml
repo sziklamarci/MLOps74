@@ -23,7 +23,7 @@ jobs:
         pip install "dvc[gdrive]"
 
     - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
+      uses: google-github-actions/setup-gcloud@main
       with:
         project_id: mlops74
         service_account_key: ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }}
