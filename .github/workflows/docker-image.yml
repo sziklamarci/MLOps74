@@ -22,10 +22,16 @@ jobs:
         pip install "dvc[gs]"
         pip install "dvc[gdrive]"
 
-    - name: Authenticate with DVC (using previously committed credentials)
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: mlops74
+        service_account_key: ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }}
+        export_default_credentials: true
+    
+    - name: DVC Pull
       run: |
         cd mlops74
-        pip install -U pyopenssl cryptography
         dvc pull -v
 
     - name: Build the Docker image
