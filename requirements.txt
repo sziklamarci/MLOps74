@@ -5,3 +5,4 @@ pytest<7.4.4
 torch<2.1.0
 torchvision<0.15.2a0
 tqdm<4.66.1
+opencv-python<4.6.0
