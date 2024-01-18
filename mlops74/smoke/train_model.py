@@ -49,9 +49,6 @@ def train(config):
     train_loader = DataLoader(train_dataset, batch_size=hparams["batch_size"], shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=hparams["batch_size"], shuffle=False)
 
-    model = MyNeuralNet()
-
-
     criterion = nn.CrossEntropyLoss()  # Use CrossEntropyLoss for classification tasks
     optimizer = optim.Adam(model.parameters(), lr=hparams["lr"])
 
