@@ -45,7 +45,7 @@ def load_images_from_folder(folder):
     print(f"Number of images: {len(images)}, Number of labels: {len(labels)}")
     return np.array(images), np.array(labels)
 
-    
+
 def process_data():
     train_images, train_labels = load_images_from_folder('mlops74/data/raw/archive/Training/Training')
     val_images, val_labels = load_images_from_folder('mlops74/data/raw/archive/Validation/Validation')
@@ -81,9 +81,9 @@ if __name__ == '__main__':
     val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
-    torch.save(train_dataset, "data/processed/Training/train_dataset.pt")
-    torch.save(val_dataset, "data/processed/Validation/val_dataset.pt")
-    torch.save(test_dataset, "data/processed/Testing/test_dataset.pt")
+    torch.save(train_dataset, "mlops74/data/processed/Training/train_dataset.pt")
+    torch.save(val_dataset, "mlops74/data/processed/Validation/val_dataset.pt")
+    torch.save(test_dataset, "mlops74/data/processed/Testing/test_dataset.pt")
 
     # Check the length after loading
     #print("Length of train_dataset after loading:", len(train_images), len(train_labels))

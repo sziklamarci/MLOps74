@@ -11,8 +11,8 @@ import numpy as np
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Create data loaders
-train_loader = DataLoader(torch.load("/data/processed/Training/train_dataset.pt"), batch_size=64, shuffle=True)
-val_loader = DataLoader(torch.load("/data/processed/Validation/val_dataset.pt"), batch_size=64, shuffle=False)
+train_loader = DataLoader(torch.load("data/processed/Training/train_dataset.pt"), batch_size=64, shuffle=True)
+val_loader = DataLoader(torch.load("data/processed/Validation/val_dataset.pt"), batch_size=64, shuffle=False)
 
 # Createing the model with MyResNet class
 model = MyNeuralNet(num_classes=2).to(device)
