@@ -7,13 +7,14 @@ RUN apt update && \
 RUN apt-get update && \
     apt-get install -y libglib2.0-0 libgl1-mesa-glx && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt requirements.txt
-COPY pyproject.toml pyproject.toml
-COPY smoke/ smoke/
-COPY data/ data/
-COPY models/ models/
+WORKDIR /mlops74/
 
-WORKDIR /
+COPY ../requirements.txt .
+COPY ../pyproject.toml .
+COPY ../smoke/ smoke/
+COPY ../data/ data/
+COPY ../models/ models/
+
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
