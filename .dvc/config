@@ -1,7 +1,9 @@
 [core]
-    remote = remote_storage
+    remote = mygcsremote
 ['remote "storage"']
     url = gdrive://1UYdxxlSoLmMY2lXc6bFoct7Ie8vYsLIz
 ['remote "remote_storage"']
     url = gs://mlops74bucket/
     version_aware = true
+['remote "mygcsremote"']
+    url = gs://mlops74bucket
