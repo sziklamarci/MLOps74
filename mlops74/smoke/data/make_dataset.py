@@ -5,7 +5,6 @@ import numpy as np
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 import torchvision.transforms.functional as F
-import matplotlib.pyplot as plt
 
 class CustomDataset(Dataset):
     def __init__(self, images, labels, transform=None):
