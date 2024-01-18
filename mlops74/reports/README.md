@@ -359,7 +359,7 @@ Version control is an extremely useful tool, it allows developers to keep track 
 >
 > Answer:
 
---- question 16 fill here ---
+We performed debugging mostly troubleshooting the errors we were getting on our way, AI tools like chatGPT have been extremely helpful for understanding how to troubleshoot some of the errors. We also performed some profiling on our scripts but we did not modified it much since they were working, we focused on developing the other parts of the project.
 
 ## Working in the cloud
 
