@@ -24,7 +24,7 @@ jobs:
     - name: Authenticate with DVC (using previously committed credentials)
       run: |
         cd mlops74
-        sudo apt-get install libssl-dev
+        pip install -U pyopenssl cryptography
         dvc pull
 
     - name: Build the Docker image
