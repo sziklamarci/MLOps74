@@ -23,6 +23,12 @@ class MyNeuralNet(nn.Module):
         x = self.fc(x)
         return F.sigmoid(x)
 
-#model = MyNeuralNet()
+model = MyNeuralNet()
 
-#print(model)
+print(model)
+
+#script model using jit
+scripted_model = torch.jit.script(model)
+# Save the scripted model
+scripted_model.save("model_scripted.pt")
+
