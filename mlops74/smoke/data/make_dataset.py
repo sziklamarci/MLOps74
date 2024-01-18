@@ -48,9 +48,9 @@ def load_images_from_folder(folder):
 
     
 def process_data():
-    train_images, train_labels = load_images_from_folder('data/raw/archive/Training/Training')
-    val_images, val_labels = load_images_from_folder('data/raw/archive/Validation/Validation')
-    test_images, test_labels = load_images_from_folder('data/raw/archive/Testing/Testing')
+    train_images, train_labels = load_images_from_folder('mlops74/data/raw/archive/Training/Training')
+    val_images, val_labels = load_images_from_folder('mlops74/data/raw/archive/Validation/Validation')
+    test_images, test_labels = load_images_from_folder('mlops74/data/raw/archive/Testing/Testing')
 
     return (train_images, train_labels), (val_images, val_labels), (test_images, test_labels)
 

@@ -1,0 +1,10 @@
+lr: 0.001
+n_epochs: 10
+seed: 1337
+p_RandomVerticalFlip: 0.5
+p_RandomHorizontalFlip: 0.5
+p_RandomErasing: 0.5
+scale_RandomErasing: [0.1, 0.15]
+mean_Normalize: [0.485, 0.456, 0.406]
+std_Normalize: [0.229, 0.224, 0.225]
+batch_size: 64
