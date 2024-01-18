@@ -21,13 +21,8 @@ jobs:
         pip install dvc
         pip install "dvc[gs]"
         pip install "dvc[gdrive]"
-
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@main
-      with:
-        project_id: mlops74
-        service_account_key: ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }}
-        export_default_credentials: true
+        echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > key.json
+        gcloud auth activate-service-account --key-file=key.json
     
     - name: DVC Pull
       run: |
