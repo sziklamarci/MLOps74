@@ -90,12 +90,12 @@ for epoch in tqdm(range(EPOCHS)):
     val_loss: {val_loss / len(val_loader):.4f}, val_acc: {val_accuracy:.3f} \
     Learning Rate: {optimizer.param_groups[0]["lr"]}')
 
-    torch.save(model.state_dict(), "models/checkpoints/last.pth")
+    torch.save(model.state_dict(), "mlops74/models/checkpoints/last.pth")
     # Check for improvement and apply early stopping
     if val_loss < best_loss:
         counter = 0
         best_loss = val_loss
-        torch.save(model.state_dict(), "models/checkpoints/best.pth")
+        torch.save(model.state_dict(), "mlops74/models/checkpoints/best.pth")
     else:
         counter += 1
 

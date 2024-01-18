@@ -8,8 +8,8 @@ import os.path
 @pytest.mark.skipif(not os.path.exists('/Users/macbookpro/MLOps74/mlops74/data/raw/archive/Training'), reason="Data files not found")
 
 def test_data():
-    train_images, train_labels = load_images_from_folder('data/raw/archive/Training/Training')
-    val_images, val_labels = load_images_from_folder('data/raw/archive/Validation/Validation')
+    train_images, train_labels = load_images_from_folder('mlops74/data/raw/archive/Training/Training')
+    val_images, val_labels = load_images_from_folder('mlops74/data/raw/archive/Validation/Validation')
 
     transform_train = transforms.Compose([
         transforms.ToTensor(),

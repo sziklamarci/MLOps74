@@ -2,7 +2,7 @@ import subprocess
 import os
 
 def test_training_script():
-    script_path = 'mlops74/smoke/train_model.py'
+    script_path = 'mlops74/smoke/train_model2.py'
     command = ['python', script_path]
     
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
