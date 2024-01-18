@@ -3,5 +3,5 @@
 ['remote "storage"']
     url = gdrive://1UYdxxlSoLmMY2lXc6bFoct7Ie8vYsLIz
 ['remote "remote_storage"']
-    url = gs://mlops74bucket/
+    url = gs://mlops74_bucket/
     version_aware = true
