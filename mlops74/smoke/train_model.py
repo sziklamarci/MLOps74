@@ -9,10 +9,13 @@ from models.model import MyNeuralNet
 import os
 import hydra
 from omegaconf import OmegaConf
+import wandb
 
 @hydra.main(config_path="config", config_name="default_config.yaml")
 def train(config):
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
+    
+    wandb.init(project="project_mlops74", name="mlops74")
 
     hparams = config.experiment
     torch.manual_seed(hparams["seed"])
@@ -62,6 +65,7 @@ def train(config):
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
+            wandb.log({"train_loss": loss.item()})  # Log training loss
 
         # Validation
         model.eval()
@@ -77,6 +81,7 @@ def train(config):
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
+                wandb.log({"val_loss": loss.item()})  # Log validation loss
 
             print(f"Epoch {epoch + 1}/{hparams['n_epochs']}, Loss: {val_loss / len(val_loader)}, Accuracy: {(correct / total) * 100}%")
 
