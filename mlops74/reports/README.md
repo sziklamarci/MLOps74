@@ -279,6 +279,7 @@ Version control is an extremely useful tool, it allows developers to keep track 
 
 
 
+
 ## Running code and tracking experiments
 
 > In the following section we are interested in learning more about the experimental setup for running your code and
@@ -375,7 +376,7 @@ Version control is an extremely useful tool, it allows developers to keep track 
 >
 > Answer:
 
-We didn't manage to work with gcp but the two services we would have used are: 
+At first working with GCP was challeenging and managing to actually update the data was not immidiate, after some efforts we managed to connect everything and use the following tools: 
 1) Google Cloud Compute Engine that provides virtual machines (VMs) for our project in order to set up our development and deployment environments, allowing us to run and manage code and applications in a scalable and controlled manner.
 2) Google Cloud Storage (Bucket): would have served as our data storage solution. We would have stored various project assets, including datasets and model checkpoints, in these buckets.
 
@@ -392,7 +393,7 @@ We didn't manage to work with gcp but the two services we would have used are:
 >
 > Answer:
 
-Sadly we had some issues developing this part of the project and we didn't manage to make use of the googe services, we just created the project and the bucket for it. 
+---- answer here --------
 
 ### Question 19
 
@@ -401,7 +402,7 @@ Sadly we had some issues developing this part of the project and we didn't manag
 >
 > Answer:
 
---- question 19 fill here ---
+![my_image](figures/bucket74.png)
 
 ### Question 20
 
