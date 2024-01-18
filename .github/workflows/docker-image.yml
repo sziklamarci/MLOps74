@@ -19,6 +19,7 @@ jobs:
     - name: Install DVC
       run: |
         pip install dvc
+        pip install "dvc[gdrive]"
 
     - name: Authenticate with DVC (using previously committed credentials)
       run: |
