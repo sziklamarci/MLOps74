@@ -6,9 +6,8 @@ import torch.nn.functional as F
 class MyNeuralNet(nn.Module):
     def __init__(self, num_classes=2, dropout_rate=0.5) -> None:
         super(MyNeuralNet, self).__init__()
-        resnet = models.resnet34(pretrained=True)  # We can choose from ResNet variants (18,34,50,101,110,152..) if needed
-        self.features = nn.Sequential(*list(resnet.children())[:-2])  # Remove the last two layers (avgpool and fc) in case we want to add something more
-        
+        resnet = models.resnet34(pretrained=True)
+        self.features = nn.Sequential(*list(resnet.children())[:-2])
         self.avgpool = nn.AdaptiveAvgPool2d(1)
         self.fc = nn.Linear(resnet.fc.in_features, num_classes)
         self.dropout = nn.Dropout(p=dropout_rate)
@@ -21,14 +20,14 @@ class MyNeuralNet(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.dropout(x)
         x = self.fc(x)
-        return F.sigmoid(x)
+        return torch.sigmoid(x)  # Use torch.sigmoid instead of F.sigmoid
 
 model = MyNeuralNet()
 
 print(model)
 
-#script model using jit
+# Script the model using jit
 scripted_model = torch.jit.script(model)
-# Save the scripted model
-scripted_model.save("model_scripted.pt")
 
+# Save the scripted model with the correct method
+torch.jit.save(scripted_model, "model_scripted.pt")
