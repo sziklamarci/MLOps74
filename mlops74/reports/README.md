@@ -73,7 +73,7 @@ end of the project.
 ### Week 2
 
 * [x] Write unit tests related to the data part of your code
-* [ ] Write unit tests related to model construction and or model training
+* [x] Write unit tests related to model construction and or model training
 * [x] Calculate the coverage.
 * [ ] Get some continuous integration running on the github repository
 * [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
@@ -274,7 +274,7 @@ Version control is an extremely useful tool, it allows developers to keep track 
 >
 > Answer:
 
-
+We attempted to implement 2 different CI actions, one for continuous unittesting and another for continuous containers. Although having almost 300 different tries with necessary troubleshooting, we didn't manage to complete them fully, as in the end we were stalled by multiple different issues, for example the authentication process for dockers. During the first couple of approaches with google drive, the obstacle was opening the authentication link with redirect, that pointed to a local server which was unable to be reached out by any of the browsers. With having tests regarding data, we also needed authentication process, which was far more difficult to properly be implemented and carried out than we anticipated, but the main idea was to initialize the gcloud on the created VMs so we can add an authentication json key by setting its content as a repository secret, with our credentials so the data from gcp bucket can be accessed for data unittests and docker image building for docker hub to update the model's checkpoints by model training upon checking out from the model's branch. For the case of automatizing the unittests we attmpted to implement the process for every checkout, since we have been continuously developing more and more tests, and in terms of newly introducedd processes we have to create brand new tests, so it would keep the scripts consistent and traceable in case of errors and warnings. 
 
 
 
