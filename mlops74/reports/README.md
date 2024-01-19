@@ -360,7 +360,11 @@ Besides the automatic upload to Weights & Biases, we also save the logs of every
 >
 > Answer:
 
---- question 15 fill here ---
+In our experiments, Docker played a crucial role in containerizing our applications for seamless deployment and reproducibility. We utilized a Cookiecutter template, which included a dedicated folder for Dockerfiles. Inside this folder, we created specific Dockerfiles for training and prediction tasks. The orchestration was handled by a Docker Compose file (docker-compose.yaml) in the root directory.
+Thes Dockerfiles “train_model.dockerfile” and “predict_model.dockerfile” define the environment, install dependencies, and set the entry points for training and prediction scripts. The Docker Compose file orchestrates these containers, providing a streamlined way to run experiments consistently. The source code and Dockerfiles can be found here:
+- Docker Compose <https://github.com/sziklamarci/MLOps74/blob/main/mlops74/docker-compose.yaml>
+- Train Model <https://github.com/sziklamarci/MLOps74/blob/main/mlops74/dockerfiles/train_model.dockerfile>
+- Predict Model <https://github.com/sziklamarci/MLOps74/blob/main/mlops74/dockerfiles/predict_model.dockerfile>
 
 ### Question 16
 
