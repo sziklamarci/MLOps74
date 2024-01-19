@@ -18,8 +18,6 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        cd mlops74
-        ls -la
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
         docker build . --file dockerfiles/train_model2.dockerfile \
