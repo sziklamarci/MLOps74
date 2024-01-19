@@ -512,7 +512,7 @@ Monitoring in MLOps is important for maintaining the functionality of machine le
 >
 > Answer:
 
---- question 24 fill here ---
+During the deployment and the storage usage, interestingly we didn't have any expenses.
 
 ## Overall discussion of project
 
@@ -533,7 +533,7 @@ Monitoring in MLOps is important for maintaining the functionality of machine le
 >
 > Answer:
 
---- question 25 fill here ---
+The diagram shows our overall infrastructure, however it's worth to note that we didn't manage to set up continous workflows.
 
 ### Question 26
 
