@@ -574,3 +574,5 @@ Another challenge was setting up a solid CI pipeline. We wanted our project to f
 s223588 was in charge of developing the cookiecutter structure and to implement the make_dataset.py and model.py scripts (that have been improved and modify by the other team members as well), he was also in charge of setting some CI on the github repository and to create a gcp bucket for the data. 
 
 s240500 implemented the train_model.py script and integrated the Hydra config and WandB with different experiment configs and logs and statistics. He adjusted and improved already existing scripts and Dockerfiles such that they run integrated (train and test integration in Docker).
+
+s230086 set up the gcloud and transferred the project from gdrive. Then developed the API with the corresponding predicting files, and then was in full charge of local and cloud deployment.
