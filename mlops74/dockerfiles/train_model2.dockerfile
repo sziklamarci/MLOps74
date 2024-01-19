@@ -14,10 +14,8 @@ RUN echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json \
 
 RUN pip install dvc \
     pip install "dvc[gs]" \
-    pip install "dvc[gdrive]"
-CMD cd mlops74
-RUN dvc pull \
-    ls -a
+    pip install "dvc[gdrive]" \
+    dvc pull
 
 WORKDIR /
 
