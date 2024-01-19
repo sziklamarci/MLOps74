@@ -7,3 +7,4 @@ torchvision==0.15.2a0
 tqdm==4.66.1
 opencv-python==4.6.0
 wandb==0.16.1
+threadpoolctl==3.2.0

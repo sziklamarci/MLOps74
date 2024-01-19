@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from sklearn.metrics import precision_score, recall_score, f1_score
 from data.make_dataset import CustomDataset, process_data
 from models.model import MyNeuralNet
 
@@ -73,6 +74,8 @@ def train(config):
             val_loss = 0.0
             correct = 0
             total = 0
+            all_predictions = []
+            all_labels = []
             for images, labels in val_loader:
                 images, labels = images.to(device), labels.to(device)
                 outputs = model(images)
@@ -81,9 +84,19 @@ def train(config):
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
-                wandb.log({"val_loss": loss.item()})  # Log validation loss
 
-            print(f"Epoch {epoch + 1}/{hparams['n_epochs']}, Loss: {val_loss / len(val_loader)}, Accuracy: {(correct / total) * 100}%")
+                all_predictions.extend(predicted.cpu().numpy())
+                all_labels.extend(labels.cpu().numpy())
+
+            precision = precision_score(all_labels, all_predictions, average='macro')
+            recall = recall_score(all_labels, all_predictions, average='macro')
+            f1 = f1_score(all_labels, all_predictions, average='macro')
+
+            wandb.log({"val_loss": val_loss / len(val_loader), "accuracy": (correct / total) * 100,
+                       "precision": precision, "recall": recall, "f1_score": f1})  # Log additional metrics
+
+            print(f"Epoch {epoch + 1}/{hparams['n_epochs']}, Loss: {val_loss / len(val_loader)}, "
+                  f"Accuracy: {(correct / total) * 100}%, Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
 
     print("Training complete.")
 
