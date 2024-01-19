@@ -22,6 +22,7 @@ WORKDIR /
 COPY /mlops74/requirements.txt /mlops74/requirements.txt
 COPY /mlops74/pyproject.toml /mlops74/pyproject.toml
 COPY /mlops74/smoke/ /mlops74/smoke/
+RUN ls -a
 COPY data/ /mlops74/data/
 COPY /mlops74/models/ /mlops74/models/
 
