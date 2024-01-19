@@ -345,7 +345,25 @@ Besides the automatic upload to Weights & Biases, we also save the logs of every
 >
 > Answer:
 
---- question 14 fill here ---
+In our initial experiments on W&B, we began by tracking two fundamental metrics: val_loss and train_loss.
+
+- Validation Loss (val_loss) serves as a critical indicator of our model's performance on unseen validation data. A rising val_loss could signify overfitting, prompting adjustments to enhance generalization.
+- Training Loss (train_loss) shows the model's error during the training phase. A decreasing train_loss implies effective learning from the training dataset. 
+
+However, a large gap between train_loss and val_loss might suggest overfitting, emphasizing the need for careful model tuning.
+Monitoring both metrics is pivotal. A close alignment between train_loss and val_loss indicates a model that generalizes well to new data. A significant gap may signify overfitting, prompting adjustments to achieve a balance.
+
+![Alt text](image-2.png)
+
+Building upon our initial tracking of val_loss and train_loss, we've expanded our metrics and decided to include accuracy, precision, recall, and F1 score.
+
+Accuracy provides a holistic measure of our model's correctness, revealing the percentage of correctly classified instances among all predictions.
+
+Precision is a metric for the accuracy of positive predictions, showing the ratio of true positives to the sum of true positives and false positives. It's a valuable metric in scenarios where minimizing false positives is critical. Recall describes our model's ability to capture all positive instances, showcasing the ratio of true positives to the sum of true positives and false negatives. The F1 score serves as a harmonized metric, consisting of a balance between precision and recall.
+
+While accuracy provides a broad overview, precision, recall, and F1 score offer insights into specific aspects of classification.
+
+![Alt text](image-3.png)
 
 ### Question 15
 
@@ -396,7 +414,7 @@ We performed debugging mostly troubleshooting the errors we were getting on our 
 >
 > Answer:
 
-At first working with GCP was challeenging and managing to actually update the data was not immidiate, after some efforts we managed to connect everything and use the following tools: 
+At first working with GCP was challenging and managing to actually update the data was not immidiate, after some efforts we managed to connect everything and use the following tools: 
 1) Google Cloud Compute Engine that provides virtual machines (VMs) for our project in order to set up our development and deployment environments, allowing us to run and manage code and applications in a scalable and controlled manner.
 2) Google Cloud Storage (Bucket): would have served as our data storage solution. We would have stored various project assets, including datasets and model checkpoints, in these buckets.
 
