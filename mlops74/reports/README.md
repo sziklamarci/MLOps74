@@ -533,6 +533,7 @@ During the deployment and the storage usage, interestingly we didn't have any ex
 >
 > Answer:
 
+![my_image](figures/architecture.png)
 The diagram shows our overall infrastructure, however it's worth to note that we didn't manage to set up continous workflows.
 
 ### Question 26
