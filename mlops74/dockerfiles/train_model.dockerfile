@@ -13,7 +13,7 @@ COPY ../requirements.txt .
 COPY ../pyproject.toml .
 COPY ../smoke/ smoke/
 COPY ../data/ data/
-COPY ../models/ models/
+COPY models/ models/
 
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
