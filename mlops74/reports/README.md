@@ -541,6 +541,9 @@ In summary, our deployed model is integrating local development with cloud-based
 
 The diagram shows our overall infrastructure, however it's worth to note that we didn't manage to set up continous workflows.
 
+![my_image](figures/architecture.png)
+
+
 ### Question 26
 
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
