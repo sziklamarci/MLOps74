@@ -533,16 +533,14 @@ During the deployment and the storage usage, interestingly we didn't have any ex
 >
 > Answer:
 
-In deploying our model, we've implemented a comprehensive system to ensure efficiency, testing, reproducability and reliability. Local Python files incorporate WandB monitoring, providing real-time insights into model performance. This includes metrics, visualizations, and logs to track the model's behavior during inference. Pytest scripts verify the model's functionality, enabling automated testing to catch any potential issues early on. Our deployment strategy leverages Docker images, ensuring to portability and consistency across different environments. Automated workflow actions would be triggered upon checkouts, ensuring that the deployment process is streamlined and error-free while providing continuous updates for our model. This can further simplifie the deployment pipeline.
+In deploying our model, we've implemented a comprehensive system to ensure efficiency, testing, reproducability and reliability. Local Python files incorporate WandB monitoring, providing real-time insights into model performance aswell as Hydra for easy configuration management. This includes metrics, visualizations, and logs to track the model's behavior during inference. Pytest scripts verify the model's functionality, enabling automated testing to catch any potential issues early on. Our deployment strategy leverages Docker images, ensuring to portability and consistency across different environments. To develop and contribute seamlessly together, our team used GitHub. Automated workflow actions would be triggered upon checkouts, ensuring that the deployment process is streamlined and error-free while providing continuous updates for our model. This can further simplify the deployment pipeline.
 For effective version control and data management, we utilize Google Cloud Platform's (GCP) storage solutions. A GCloud bucket is employed for Data Version Control (DVC), while docker images and containers would be stored in GCP Container Registry, ensuring accessibility and consistency in deploying the same image across various instances.
 To make our model accessible and scalable, we deploy it on Cloud Run using FastAPI. This serverless environment allows us to handle varying workloads efficiently, ensuring optimal performance and cost efficiency. FastAPI facilitates rapid development allowing easy interaction with our deployed model.
 
 In summary, our deployed model is integrating local development with cloud-based solutions. From local monitoring and testing to dockerized deployment and cloud-based hosting, each component contributes to the overall efficiency, reliability, and scalability of our deployed machine learning model. This approach ensures that our model remains properly robust, adaptable, and performs optimally in diverse real-world scenarios.
 
-The diagram shows our overall infrastructure, however it's worth to note that we didn't manage to set up continous workflows.
-
 ![my_image](figures/architecture.png)
-
+The diagram shows our overall infrastructure, however it's worth to note that we didn't manage to set up error-free continous workflows.
 
 ### Question 26
 
