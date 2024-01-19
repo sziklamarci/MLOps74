@@ -14,20 +14,20 @@ RUN echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json \
 
 RUN pip install dvc \
     pip install "dvc[gs]" \
-    pip install "dvc[gdrive]" \
-    dvc pull \
-    cd mlops74 \
+    pip install "dvc[gdrive]"
+CMD cd mlops74
+RUN dvc pull \
     ls -a
 
 WORKDIR /
 
-COPY /mlops74/requirements.txt /mlops74/requirements.txt
-COPY /mlops74/pyproject.toml /mlops74/pyproject.toml
-COPY /mlops74/smoke/ /mlops74/smoke/
-COPY data/ /mlops74/data/
-COPY /mlops74/models/ /mlops74/models/
+COPY requirements.txt requirements.txt
+COPY pyproject.toml pyproject.toml
+COPY smoke/ smoke/
+COPY data/ data/
+COPY models/ models/
 
-RUN pip install -r mlops74/requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "mlops74/smoke/train_model2.py"]
+ENTRYPOINT ["python", "-u", "smoke/train_model2.py"]
