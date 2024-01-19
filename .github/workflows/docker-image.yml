@@ -26,6 +26,8 @@ jobs:
         pip install "dvc[gs]"
         pip install "dvc[gdrive]"
         echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json
+        echo "Contents of /tmp/key.json:"
+        cat /tmp/key.json
         cp /tmp/key.json /usr/src/app/
         env GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/key.json
         dvc pull
