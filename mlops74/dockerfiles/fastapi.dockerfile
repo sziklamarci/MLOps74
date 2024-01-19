@@ -11,4 +11,5 @@ RUN pip install python-multipart
 COPY mlops74/smoke/myfastapi /usr/src/app/myfastapi
 COPY mlops74/smoke/models /usr/src/app/models
 
-CMD ["uvicorn", "myfastapi.main:app", "--host", "0.0.0.0", "--port", "80"]
+EXPOSE 8080
+CMD ["uvicorn", "myfastapi.main:app", "--host", "0.0.0.0", "--port", "8080"]
