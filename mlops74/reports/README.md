@@ -277,9 +277,6 @@ Version control is an extremely useful tool, it allows developers to keep track 
 We attempted to implement 2 different CI actions, one for continuous unittesting and another for continuous containers. Although having almost 300 different tries with necessary troubleshooting, we didn't manage to complete them fully, as in the end we were stalled by multiple different issues, for example the authentication process for dockers. During the first couple of approaches with google drive, the obstacle was opening the authentication link with redirect, that pointed to a local server which was unable to be reached out by any of the browsers. With having tests regarding data, we also needed authentication process, which was far more difficult to properly be implemented and carried out than we anticipated, but the main idea was to initialize the gcloud on the created VMs so we can add an authentication json key by setting its content as a repository secret, with our credentials so the data from gcp bucket can be accessed for data unittests and docker image building for docker hub to update the model's checkpoints by model training upon checking out from the model's branch. For the case of automatizing the unittests we attmpted to implement the process for every checkout, since we have been continuously developing more and more tests, and in terms of newly introducedd processes we have to create brand new tests, so it would keep the scripts consistent and traceable in case of errors and warnings. 
 
 
-
-
-
 ## Running code and tracking experiments
 
 > In the following section we are interested in learning more about the experimental setup for running your code and
@@ -501,7 +498,7 @@ Upon receiving the image, our FastAPI application processes it and utilizes our 
 >
 > Answer:
 
---- question 23 fill here ---
+Monitoring in MLOps is important for maintaining the functionality of machine learning applications. Challenges such as detecting subtle data drift and managing alert systems are addressed through adaptive responses. With being able to adapt to changing environment the application can keep identifying smoking non-smoking habits even if we deploy the application in public environment (eg. smoking regulation by government). Early identification of data drift ensures proactive responses from the system, maintaining the model's effectiveness in dynamic environments and contributing to the overall reliability and longevity for us. Additionally, telemetry involves automatic measurement and wireless transmission of data from applications, containing metrics, logs and traces. Metrics can track the number of processed images or video frames, providing an overview of the system's performance. Logs play a crucial role in debugging by recording events, errors, and warnings during model inference. This aids in identifying issues specific to smoking identification, ensuring prompt debugging. Traces help understand the flow of data within the system, allowing optimization for real-time processing, contributing to the overall longevity and sustained accuracy of the smoking identification model.
 
 ### Question 24
 
@@ -571,8 +568,10 @@ Another challenge was setting up a solid CI pipeline. We wanted our project to f
 >
 > Answer:
 
-s223588 was in charge of developing the cookiecutter structure and to implement the make_dataset.py and model.py scripts (that have been improved and modify by the other team members as well), he was also in charge of setting some CI on the github repository and to create a gcp bucket for the data. 
+s223588 was in charge of developing the cookiecutter structure and to implement the make_dataset.py and model.py scripts (that have been improved and modified by the other team members as well), he was also in charge of setting some CI on the github repository and to create a gcp bucket for the data. 
 
 s240500 implemented the train_model.py script and integrated the Hydra config and WandB with different experiment configs and logs and statistics. He adjusted and improved already existing scripts and Dockerfiles such that they run integrated (train and test integration in Docker).
 
 s230086 set up the gcloud and transferred the project from gdrive. Then developed the API with the corresponding predicting files, and then was in full charge of local and cloud deployment.
+
+s223220 took part in refining the model's structure, implemented train_model2.py with lr scheduler and AdamW optimizer with weight decay. Implemented unittesting and coverage, and was in charge of creating initial dockerfiles and initial dvc. Contributed to CI with the attempt of automatizing dockers.
