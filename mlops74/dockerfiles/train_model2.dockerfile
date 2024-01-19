@@ -22,7 +22,7 @@ WORKDIR /
 COPY /mlops74/requirements.txt /mlops74/requirements.txt
 COPY /mlops74/pyproject.toml /mlops74/pyproject.toml
 COPY /mlops74/smoke/ /mlops74/smoke/
-COPY /mlops74/data/ /mlops74/data/
+COPY data/ /mlops74/data/
 COPY /mlops74/models/ /mlops74/models/
 
 RUN pip install -r mlops74/requirements.txt --no-cache-dir
