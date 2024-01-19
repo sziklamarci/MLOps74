@@ -15,15 +15,15 @@ RUN echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json \
 RUN pip install dvc \
     pip install "dvc[gs]" \
     pip install "dvc[gdrive]" \
-    dvc pull
+    dvc pull \
+    cd mlops74 \
+    ls -a
 
 WORKDIR /
 
 COPY /mlops74/requirements.txt /mlops74/requirements.txt
 COPY /mlops74/pyproject.toml /mlops74/pyproject.toml
 COPY /mlops74/smoke/ /mlops74/smoke/
-RUN cd mlops74/ \
-    ls -a
 COPY data/ /mlops74/data/
 COPY /mlops74/models/ /mlops74/models/
 
