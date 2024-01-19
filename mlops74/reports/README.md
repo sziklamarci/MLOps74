@@ -324,8 +324,8 @@ We utilized Hydra for streamlined experiment configuration. We integrated Hydra 
 To ensure reproducibility, we employed Hydra for experiment configuration. Each experiment was defined in a separate configuration file, facilitating the systematic management of hyperparameters. To secure information preservation and reproducibility, we used a fixed seed (hparams["seed"]) for all random operations, ensuring the same randomization across runs. This guarantees that the model training process and data augmentation remain consistent. The entire configuration, including model architecture, optimizer, and data preprocessing, was logged using Weights and Biases (wandb). This logging enabled us to track and reproduce experiment details, ensuring transparency and reproducibility.
 Besides the automatic upload to Weights & Biases, we also save the logs of every run locally in an "output"-folder. This folder contains subfolders with date- and timestamps for every run, aswell as all hydra configs and all wandb logs.
 
-![Alt text](image-1.png)
-![Alt text](image.png)
+![wandb summary](figures/image-1.png)
+![Folder system for reproducibility](figures/image.png)
 
 ### Question 14
 
@@ -350,7 +350,7 @@ In our initial experiments on W&B, we began by tracking two fundamental metrics:
 However, a large gap between train_loss and val_loss might suggest overfitting, emphasizing the need for careful model tuning.
 Monitoring both metrics is pivotal. A close alignment between train_loss and val_loss indicates a model that generalizes well to new data. A significant gap may signify overfitting, prompting adjustments to achieve a balance.
 
-![Alt text](image-2.png)
+![Validation and training losses](figures/image-2.png)
 
 Building upon our initial tracking of val_loss and train_loss, we've expanded our metrics and decided to include accuracy, precision, recall, and F1 score.
 
@@ -360,7 +360,7 @@ Precision is a metric for the accuracy of positive predictions, showing the rati
 
 While accuracy provides a broad overview, precision, recall, and F1 score offer insights into specific aspects of classification.
 
-![Alt text](image-3.png)
+![Validation metrics](figures/image-3.png)
 
 ### Question 15
 
