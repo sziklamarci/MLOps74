@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y curl
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/root/google-cloud-sdk/bin
 
-WORKDIR /mlops74/
+WORKDIR /
 
 RUN pip install dvc
 RUN pip install "dvc[gs]"
@@ -26,7 +26,7 @@ COPY .dvcignore /usr/src/app/
 RUN echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json \
     gcloud auth activate-service-account --key-file=/tmp/key.json
 
-COPY /temp/key.json /usr/src/app/
+COPY /tmp/key.json /usr/src/app/
 ENV GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/key.json
 
 RUN dvc pull
