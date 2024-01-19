@@ -428,7 +428,7 @@ At first working with GCP was challenging and managing to actually update the da
 >
 > Answer:
 
----- answer here --------
+We were unable to implement GCP Compute Engine, yet its capabilities would have significantly benefited our project. Its dynamic scalability is particularly effective for managing fluctuating user traffic, ensuring consistent application performance. Furthermore, the model's cost-effectiveness aligns well with budget constraints, charging only for the resources utilized. The platform's renowned security and reliability also promise minimized risks of downtime and breaches. Additionally, its global infrastructure could have enhanced user experience through reduced latency. This presents a notable opportunity for future endeavors.
 
 ### Question 19
 
@@ -455,7 +455,7 @@ At first working with GCP was challenging and managing to actually update the da
 >
 > Answer:
 
---- question 21 fill here ---
+In the end we couldn't manage to utilize GCP Cloud Build for our project's build tasks. As a result, we resorted to using our local machines for these critical tasks. This was a significant deviation from our intended strategy, but it was a necessary adjustment under the circumstances. We managed to navigate these constraints effectively, ensuring our project's progression, while maintaining quality and performance.
 
 ### Question 22
 
