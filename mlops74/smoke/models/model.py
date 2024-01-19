@@ -22,12 +22,14 @@ class MyNeuralNet(nn.Module):
         x = self.fc(x)
         return torch.sigmoid(x)  # Use torch.sigmoid instead of F.sigmoid
 
-model = MyNeuralNet()
+#not needed after initial creation of model_scripted -> causes multiple copies for some reason when something else call this...
 
-print(model)
+#model = MyNeuralNet()
+
+#print(model)
 
 # Script the model using jit
-scripted_model = torch.jit.script(model)
+#scripted_model = torch.jit.script(model)
 
 # Save the scripted model with the correct method
-torch.jit.save(scripted_model, "model_scripted.pt")
+#torch.jit.save(scripted_model, "model_scripted.pt")
