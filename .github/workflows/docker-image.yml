@@ -18,9 +18,21 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        ls -la
+        cd mlops74
+        apt-get update && apt-get install -y curl
+        PATH=$PATH:/root/google-cloud-sdk/bin
+        curl -sSL https://sdk.cloud.google.com | bash
+        pip install dvc
+        pip install "dvc[gs]"
+        pip install "dvc[gdrive]"
+        echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json
+        echo "Contents of /tmp/key.json:"
+        cat /tmp/key.json
+        cp /tmp/key.json /usr/src/app/
+        env GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/key.json
+        dvc pull
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-        docker build . --file mlops74/dockerfiles/train_model2.dockerfile \
+        docker build . --file dockerfiles/train_model2.dockerfile \
             --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
