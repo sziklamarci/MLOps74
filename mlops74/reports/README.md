@@ -297,7 +297,19 @@ Version control is an extremely useful tool, it allows developers to keep track 
 >
 > Answer:
 
---- question 12 fill here ---
+We utilized Hydra for streamlined experiment configuration. We integrated Hydra in our model training code and set up a designated config folder structure. This allowed us to write various experiment files and to manage the hyperparameters in a controlled and designated manner. For example, running an experiment became as straightforward as: Changing the experiment name in "default_config.yaml" and running the train_model.py script afterwards. Each experiment file of us defined multiple hyperparameters as you can see in the following example exp.yaml example. This facilitated comprehensive experimentation with minimal code changes.
+
+lr: 0.0001
+n_epochs: 10
+seed: 1337
+p_RandomVerticalFlip: 0.5
+p_RandomHorizontalFlip: 0.5
+p_RandomErasing: 0.5
+scale_RandomErasing: [0.1, 0.15]
+mean_Normalize: [0.485, 0.456, 0.406]
+std_Normalize: [0.229, 0.224, 0.225]
+batch_size: 32
+
 
 ### Question 13
 
