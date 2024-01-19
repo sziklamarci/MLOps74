@@ -13,9 +13,9 @@ RUN echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json \
     gcloud auth activate-service-account --key-file=/tmp/key.json
 
 RUN pip install dvc \
-    pip install "dvc[gs]" \
-    pip install "dvc[gdrive]" \
-    dvc pull
+    && pip install "dvc[gs]" \
+    && pip install "dvc[gdrive]" \
+    && dvc pull
 
 WORKDIR /
 
