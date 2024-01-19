@@ -12,10 +12,12 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 RUN echo ${{ secrets.DOCKER_SERVICE_ACCOUNT_KEY }} > /tmp/key.json \
     gcloud auth activate-service-account --key-file=/tmp/key.json
 
-RUN pip install dvc \
-    && pip install "dvc[gs]" \
-    && pip install "dvc[gdrive]" \
-    && dvc pull
+RUN pip install dvc && \
+    pip install "dvc[gs]" && \
+    pip install "dvc[gdrive]" && \
+    ls -a && \
+    dvc pull && \
+    echo "Failed dvc pull" 
 
 WORKDIR /
 
