@@ -20,7 +20,7 @@ jobs:
       run: |
         cd mlops74
         apt-get update && apt-get install -y curl
-        PATH $PATH:/root/google-cloud-sdk/bin
+        PATH=$PATH:/root/google-cloud-sdk/bin
         curl -sSL https://sdk.cloud.google.com | bash
         pip install dvc
         pip install "dvc[gs]"
