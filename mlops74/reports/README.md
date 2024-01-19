@@ -474,7 +474,19 @@ At first working with GCP was challenging and managing to actually update the da
 >
 > Answer:
 
---- question 22 fill here ---
+For deploying our machine learning model, we developed a Python script using FastAPI. This script facilitates hosting an application capable of processing images and generating predictions using our trained model. The application is set up to host a server using Uvicorn.
+
+After successfully creating and testing the FastAPI application locally, we proceeded to containerize this setup. We crafted a Dockerfile that encapsulates our Python environment, including all necessary dependencies as specified in our exported requirements.txt. This approach ensures that our application environment is reproducible and isolated.
+
+Upon finalizing our Dockerfile, we proceeded to build a Docker image. This image was then pushed to Google Container Registry, and was deployed using Google Cloud Run.
+
+To interact with our deployed model, we expose a public URL. Users can invoke our service by sending an image to this URL through a POST request. This can be done using a simple curl command:
+
+curl -X POST -F "data=@image_path" https://fastapiv3-rnsciwgeiq-uc.a.run.app/cv_model/
+
+Upon receiving the image, our FastAPI application processes it and utilizes our machine learning model to generate a prediction. The response includes the prediction among other relevant information, providing users with insightful results based on their submitted images.
+
+
 
 ### Question 23
 
